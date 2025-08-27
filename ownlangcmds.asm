@@ -8,6 +8,14 @@ section .bss ; values in this section can be changed
 section .text
     global _start
 
+printnl: ; function
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, newline
+    mov rdx, 1
+    syscall
+    ret
+
 _start:
     mov r8, 0
     jmp while_loop
@@ -24,17 +32,8 @@ while_loop: ; for loop is same but instead of doing je, doing jl
     jmp while_loop
 
 if:
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, newline
-    mov rdx, 1
-    syscall
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, newline
-    mov rdx, 1
-    syscall
-
+    call printnl
+    call printnl
 
     cmp r8, 0
     je exit
